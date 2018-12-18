@@ -1,0 +1,33 @@
+
+<div class="container h-75">
+  <div class="row align-items-center h-100 justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group" >
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control form-control-sm"
+            [ngClass]="{'is-invalid': email.invalid && email.dirty, 'is-valid': email.valid && email.dirty}" 
+            formControlName="email">
+          <div class="invalid-feedback" *ngIf="email.errors && (email.dirty || email.touched )">
+            <p *ngIf="email.errors.required">Required field</p>
+            <p *ngIf="email.errors.pattern">Wrong email format</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control form-control-sm" formControlName="password"
+           [ngClass]="{'is-invalid': password.invalid && password.dirty, 'is-valid': password.valid && password.dirty}">
+          <div class="invalid-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+            <p *ngIf="password.errors.required">Required field</p>
+          </div>
+        </div>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-outline-primary btn-sm mr-4" [disabled]="loginForm.invalid">Submit</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" >Cancel</button>
+      </div>
+      </form>
+    </div>
+  </div>
+
+</div>

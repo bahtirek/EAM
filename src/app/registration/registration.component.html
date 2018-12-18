@@ -1,0 +1,48 @@
+
+<div class="container h-75">
+  <div class="row align-items-center h-100 justify-content-center">
+    <div class="col-md-5 col-lg-4">
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group" >
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control form-control-sm"
+            [ngClass]="{'is-invalid': email.invalid && email.dirty, 'is-valid': email.valid && email.dirty}" 
+            formControlName="email">
+          <div class="invalid-feedback" *ngIf="email.errors && (email.dirty || email.touched )">
+            <p *ngIf="email.errors.required">Required field</p>
+            <p *ngIf="email.errors.pattern">Wrong email format</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control form-control-sm" formControlName="password"
+           [ngClass]="{'is-invalid': password.invalid && password.dirty, 'is-valid': password.valid && password.dirty}">
+          <div class="invalid-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+            <p *ngIf="password.errors.required">Required field</p>
+            <p *ngIf="password.errors.minlength">Password min length is {{password.errors.minlength.requiredLength}}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmpassword">Confirm password</label>
+          <input type="password" id="confirmassword" class="form-control form-control-sm" formControlName="confirmPassword"
+            [ngClass]="{'is-invalid': confirmPassword.invalid && confirmPassword.dirty || (confirmPassword.dirty && registrationForm.hasError('passwordmismatch')), 
+            'is-valid': confirmPassword.valid && confirmPassword.dirty}">
+            <div class="invalid-feedback" *ngIf="confirmPassword.errors && (confirmPassword.dirty || confirmPassword.touched)">
+            <p *ngIf="confirmPassword.errors.required">Required field</p>
+          </div>
+          <div class="invalid-feedback" *ngIf="confirmPassword.dirty && registrationForm.hasError('passwordmismatch')">
+            <p *ngIf="registrationForm.errors.passwordmismatch">Password mismatch </p>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-outline-primary btn-sm mr-4" [disabled]="registrationForm.invalid">Submit</button>
+          <button type="button" class="btn btn-outline-danger btn-sm" >Cancel</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
